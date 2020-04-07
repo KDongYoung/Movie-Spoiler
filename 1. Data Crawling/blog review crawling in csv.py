@@ -5,18 +5,18 @@ import pandas as pd
 
 def get_text(final_url):
    try :
-      ##제목과 본문부분 추출
+      ##Title, Body
       res = req.urlopen(final_url)
       soup = BeautifulSoup(res, 'html.parser')
       temp = soup.select("#se_textarea")
       
-      ##title 추출
+      ##Title
       list=[]
       title = soup.head.find("meta", {"property":"og:title"}).get('content')
       list.append(title)
 
 
-      ##본문 추출
+      ##Body
       temp = soup.findAll("div", {"id":"postViewArea"})
       if temp == []:
           temp = soup.findAll("div", {"class":"se-module se-module-text"})
@@ -30,14 +30,15 @@ def get_text(final_url):
       list.append(final_url)
       return list
          
-   except:
-      print("크롤링실패")
+   except: # Fail
+      print("크롤링 실패")
 
-
+# Write Naver Blog Review CSV File
 f = open("url.txt", 'r')
 lines = f.readlines()
 results = []
-movie_title={1:"겟아웃",2:"부산행",3:"서치",4:"해피데스데이",5:"곡성"}
+movie_title={1:"겟아웃",2:"부산행",3:"서치",4:"해피데스데이",5:"곡성"} 
+            # Get out, Train to Busan, Search, Happy Deathday, The Wailing
 for i, url in enumerate(lines):
     i += 1
     if i%20 == 0:

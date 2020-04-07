@@ -18,10 +18,11 @@ def get_data(url,resp,html):
         results.append(review) 
     return results
 
+# Write movie comment CSV File
 f = open("네이버평점url.txt", 'r')
 final_url = f.readlines()
 movie_title={1:"겟아웃",2:"부산행",3:"서치",4:"해피데스데이",5:"곡성"}
-
+              # Get out, Train to Busan, Search, Happy Deathday, The Wailing
 for i,url in enumerate(final_url):
     resp = requests.get(final_url[i])
     html = BeautifulSoup(resp.content, 'html.parser')
